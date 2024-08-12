@@ -10,6 +10,8 @@ export class EmployeeController {
 
   @Post()
   async createEmployee(@Body() data: CreateEmployeeDto) {
+    console.log(data);
+    
     return this.employeeService.createEmployee(data);
   }
 
