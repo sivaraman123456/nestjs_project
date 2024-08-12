@@ -4,6 +4,6 @@ import { DesignationController } from './designation.controller';
 
 @Module({
   providers: [DesignationService],
-  controllers: [DesignationController]
+  controllers: [DesignationController],
 })
 export class DesignationModule {}

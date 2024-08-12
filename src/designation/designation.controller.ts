@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post,Delete,Param,Patch } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Param,
+  Patch,
+} from '@nestjs/common';
 import { DesignationService } from './designation.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateDesignationDto } from '../dto/create-designation.dto';
@@ -19,19 +27,18 @@ export class DesignationController {
   }
 
   @Get(':id')
-  async getDesignationsById(@Param('id')id:number) {
+  async getDesignationsById(@Param('id') id: number) {
     return this.designationService.getDesById(Number(id));
   }
   @Patch(':id')
-  async updateDesgination(@Param('id')id:number,@Body() UpdateDesignationDto:UpdateDesignationDto)
-  {
-  return  this.designationService.updateDes(Number(id),UpdateDesignationDto)
+  async updateDesgination(
+    @Param('id') id: number,
+    @Body() UpdateDesignationDto: UpdateDesignationDto,
+  ) {
+    return this.designationService.updateDes(Number(id), UpdateDesignationDto);
   }
   @Delete(':id')
-  async delDesignation(@Param('id')id:number)
-  {
-
-    return this.designationService.deleteDes(Number(id))
-
+  async delDesignation(@Param('id') id: number) {
+    return this.designationService.deleteDes(Number(id));
   }
 }

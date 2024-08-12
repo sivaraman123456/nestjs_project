@@ -1,4 +1,4 @@
-import { Injectable ,NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateEmployeeDto } from '../dto/create-employee.dto';
 import { UpdateEmployeeDto } from 'src/dto/update-employee.dto';
@@ -7,36 +7,33 @@ export class EmployeeService {
   constructor(private prisma: PrismaService) {}
 
   async createEmployee(data: CreateEmployeeDto) {
-    const exists= await this.prisma.employee.findUnique({
-      where:{email:data.email}
-    })
-    if(exists)
-    {
-    return `The user already exists `
+    const exists = await this.prisma.employee.findUnique({
+      where: { email: data.email },
+    });
+    if (exists) {
+      return `The user already exists `;
     }
-    
+
     return this.prisma.employee.create({
       data,
     });
   }
 
-async getEmployees() {
+  async getEmployees() {
     return this.prisma.employee.findMany({
       include: { designation: true },
     });
   }
-async getEmpData(id:number)
-{
-const Emp_data=await this.prisma.employee.findUnique({
-  where:{id}
-})
+  async getEmpData(id: number) {
+    const Emp_data = await this.prisma.employee.findUnique({
+      where: { id },
+    });
 
-if(!Emp_data)
-{
-  throw new NotFoundException(`Employee data not found in this id:${id}`)
-}
-return Emp_data;
-}
+    if (!Emp_data) {
+      throw new NotFoundException(`Employee data not found in this id:${id}`);
+    }
+    return Emp_data;
+  }
 
   async deleteEmployee(id: number) {
     const employee = await this.prisma.employee.delete({
@@ -47,7 +44,6 @@ return Emp_data;
     }
     return { message: 'Employee successfully deleted' };
   }
-
 
   async updateEmployee(id: number, data: UpdateEmployeeDto) {
     // Check if the employee exists
@@ -64,7 +60,9 @@ return Emp_data;
         where: { id: data.designationId },
       });
       if (!designation) {
-        throw new NotFoundException(`Designation with id ${data.designationId} not found`);
+        throw new NotFoundException(
+          `Designation with id ${data.designationId} not found`,
+        );
       }
     }
 

@@ -57,7 +57,7 @@ describe('DesignationController', () => {
 
   describe('getDesignationsById', () => {
     it('should return a designation by id', async () => {
-        const id=1;
+      const id = 1;
       const result = { id, name: 'Software Engineer' };
 
       jest.spyOn(service, 'getDesById').mockResolvedValue(result);
@@ -65,7 +65,6 @@ describe('DesignationController', () => {
       expect(await controller.getDesignationsById(id)).toEqual(result);
       expect(service.getDesById).toHaveBeenCalledWith(id);
     });
-
   });
 
   describe('updateDesgination', () => {
@@ -78,8 +77,6 @@ describe('DesignationController', () => {
       expect(await controller.updateDesgination(1, dto)).toEqual(result);
       expect(service.updateDes).toHaveBeenCalledWith(1, dto);
     });
-
- 
   });
 
   describe('delDesignation', () => {
@@ -91,7 +88,5 @@ describe('DesignationController', () => {
       expect(await controller.delDesignation(1)).toEqual(result);
       expect(service.deleteDes).toHaveBeenCalledWith(1);
     });
-
-
   });
 });
