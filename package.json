@@ -88,16 +88,5 @@
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
-  },
-  "husky":{
-    "hooks":{
-      "pre-commit":"lint-staged"
-    }
-  },
-  "lint-staged":{
-    "*.{js,json,css,html,ts}":[
-      "prettier --single-quote  --write",
-      "git add"
-    ]
   }
 }
