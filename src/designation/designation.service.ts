@@ -4,13 +4,13 @@ import {
   ConflictException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateDesignationDto } from 'src/dto/create-designation.dto';
-import { UpdateDesignationDto } from 'src/dto/update-designation.dto';
+import { CreateDesignationDto } from '../dto/create-designation.dto';
+import { UpdateDesignationDto } from '../dto/update-designation.dto';
 @Injectable()
 export class DesignationService {
   constructor(private prisma: PrismaService) {}
 
-  async createDesignation(data: CreateDesignationDto) {
+  async createDesignation(data: CreateDesignationDto){
     const exists = await this.prisma.designation.findFirst({
       where: { name: data.name },
     });
@@ -22,11 +22,11 @@ export class DesignationService {
     });
   }
 
-  async getDesignations() {
+  async getDesignations(){
     return this.prisma.designation.findMany();
   }
 
-  async getDesById(id: number) {
+  async getDesById(id: number){
     const des_data = await this.prisma.designation.findUnique({
       where: { id },
     });
@@ -36,7 +36,7 @@ export class DesignationService {
     return des_data;
   }
 
-  async updateDes(id: number, data: UpdateDesignationDto) {
+  async updateDes(id: number, data: UpdateDesignationDto){
     const des = await this.prisma.designation.findUnique({
       where: { id },
     });
@@ -54,7 +54,7 @@ export class DesignationService {
     return update_des;
   }
 
-  async deleteDes(id: number) {
+  async deleteDes(id: number){
     // Check if the designation exists
     const designation = await this.prisma.designation.findUnique({
       where: { id },
